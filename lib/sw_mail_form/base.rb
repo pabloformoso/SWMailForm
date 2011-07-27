@@ -1,8 +1,9 @@
 module SwMailForm
   class Base
-    
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
     include ActiveModel::AttributeMethods
-    
+
     attribute_method_prefix "clear_"
     attribute_method_suffix "?"
     
@@ -19,6 +20,10 @@ module SwMailForm
     
     def attribute?(attribute)
       send(attribute).present?
+    end
+    
+    def to_model
+      self
     end
   end
 end
